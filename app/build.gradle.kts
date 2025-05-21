@@ -1,9 +1,17 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
 }
-
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if(localPropertiesFile.exists()){
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
 android {
     namespace = "com.example.finalterm"
     compileSdk = 34
@@ -14,6 +22,9 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        val openAiApiKey = localProperties["OPENAI_API_KEY"] as String
+        buildConfigField("String","Authorization","\"$openAiApiKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +48,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
 
