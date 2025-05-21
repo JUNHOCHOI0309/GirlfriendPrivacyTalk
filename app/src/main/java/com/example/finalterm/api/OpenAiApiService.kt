@@ -8,7 +8,7 @@ import retrofit2.http.POST
 interface  OpenAiApiService {
     @Headers(
         "Content-Type: application/json",
-        "Authorization: Bearer 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"
+        "Authorization: Bearer sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     )
     @POST("v1/chat/completions")
     fun getChatCompletion(@Body request: ChatRequest): Call<ChatResponse>
